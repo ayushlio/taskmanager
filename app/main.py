@@ -9,8 +9,8 @@ app.include_router(tasks.router)
 
 @app.get("/")
 def root():
-    return {"message": "Task Manager API", "docs": "/docs"}
+    return {"message": "Task Manager API version 2.0", "docs": "/docs"}
 
 @app.get("/health")
 def health():
-    return {"status": "healthy"}
+    return {"status": "New healthy version"}
