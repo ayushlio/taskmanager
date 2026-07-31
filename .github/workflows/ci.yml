@@ -46,6 +46,7 @@ jobs:
       - name: Run tests
         env:
           DATABASE_URL: postgresql://taskuser:taskpass123@localhost/taskdb
+          PYTHONPATH:  .
         run: pytest tests/ -v --tb=short
 
   build-and-push:
@@ -83,8 +84,8 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          cache-from: type=gfm
-          cache-to: type=gfm,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     name: Deploy to Kubernetes
