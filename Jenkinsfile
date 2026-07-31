@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE   = 'yourusername/taskmanager-api'
+        DOCKER_IMAGE   = 'testuser12356/taskmanager-api'
         DOCKER_TAG     = "${env.BUILD_NUMBER}"
         REGISTRY_CREDS = credentials('docker-hub-credentials')
     }
