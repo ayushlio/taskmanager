@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskmanager-api
+  namespace: taskmanager
+  labels:
+    app: taskmanager-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: taskmanager-api
+  template:
+    metadata:
+      labels:
+        app: taskmanager-api
+    spec:
+      containers:
+      - name: api
+        image: taskmanager-api:latest  # replaced by CI/CD
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          value: postgresql://taskuser:taskpass123@postgres.taskmanager.svc.cluster.local/taskdb
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
