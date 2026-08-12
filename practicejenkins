@@ -12,7 +12,7 @@ pipeline {
 
         stage('Hello') {
             steps {
-                echoo 'Hello from Jenkins!'
+                echo 'Hello from Jenkins!'
             }
         }
     }
